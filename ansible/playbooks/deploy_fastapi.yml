@@ -1,0 +1,36 @@
+- hosts: swarm_manager
+  become: true
+  vars:
+    app_path: /opt/fastapi-app
+    image_name: fastapi-demo
+
+  tasks:
+    - name: Ensure app directory exists
+      ansible.builtin.file:
+        path: "{{ app_path }}"
+        state: directory
+
+    - name: Copy FastAPI project files to manager
+      ansible.builtin.copy:
+        src: "../fastapi-app/"
+        dest: "{{ app_path }}"
+        mode: "0755"
+
+    - name: Build the Docker image locally
+      community.docker.docker_image:
+        name: "{{ image_name }}"
+        tag: latest
+        build:
+          path: "{{ app_path }}"
+        source: build
+
+    - name: Deploy FastAPI service to Swarm
+      community.docker.docker_service:
+        name: fastapi
+        image: "{{ image_name }}:latest"
+        publish:
+          - published_port: 80
+            target_port: 80
+        replicas: 3
+        restart_policy:
+          condition: any

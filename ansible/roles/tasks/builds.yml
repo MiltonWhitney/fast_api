@@ -1,0 +1,18 @@
+- name: Copy FastAPI app to manager
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: "/opt/fastapi-demo/{{ item }}"
+  loop:
+    - main.py
+    - database.py
+    - models.py
+    - requirements.txt
+    - Dockerfile
+
+- name: Build the FastAPI Docker image
+  community.docker.docker_image:
+    build:
+      path: /opt/fastapi-demo
+    name: "{{ dockerhub_user }}/fastapi-demo"
+    tag: latest
+    push: false

@@ -1,0 +1,13 @@
+fastapi-todo/
+├─ app/
+│  ├─ main.py
+│  ├─ models.py
+│  ├─ database.py
+│  └─ requirements.txt
+├─ Dockerfile
+├─ .dockerignore
+├─ k8s/
+│  ├─ deployment.yaml
+│  ├─ service.yaml
+│  └─ configmap.yaml
+└─ README.md

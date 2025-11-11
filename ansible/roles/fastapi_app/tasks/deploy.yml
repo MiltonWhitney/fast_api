@@ -1,0 +1,6 @@
+- name: Deploy FastAPI Swarm stack
+  community.docker.docker_stack:
+    name: fastapi
+    state: present
+    compose:
+      - /home/ec2-user/src/fast_api/ansible/roles/fastapi_app/files/fastapi-stack.yml

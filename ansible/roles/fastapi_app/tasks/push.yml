@@ -1,0 +1,11 @@
+- name: Log in to Docker registry
+  community.docker.docker_login:
+    username: "{{ docker_username }}"
+    password: "{{ docker_password }}"
+
+- name: Tag image for registry
+  community.docker.docker_image:
+    name: fastapi-app:latest
+    repository: "{{ docker_repo }}"
+    tag: latest
+    push: true

@@ -1,0 +1,5 @@
+- name: Build FastAPI Docker image locally
+  community.docker.docker_image_build:
+    path: /home/ec2-user/src/fast_api/fastapi-app
+    name: fastapi-app
+    tag: latest

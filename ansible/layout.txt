@@ -1,0 +1,13 @@
+ansible/
+├── inventory
+├── playbooks/
+│   └── deploy_fastapi.yml
+└── roles/
+    └── fastapi_app/
+        ├── tasks/
+        │   ├── build.yml
+        │   ├── push.yml
+        │   └── deploy.yml
+        └── templates/
+            ├── Dockerfile.j2
+            └── requirements.txt.j2 
